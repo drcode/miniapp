@@ -13,6 +13,8 @@
                                body
                                server-name]
                         :as   req}]
+  (println "foo")
+  (flush)
   (case uri
     "/fereofjhh"   (do (swap! state
                               (fn [{:keys [emacs-modified
