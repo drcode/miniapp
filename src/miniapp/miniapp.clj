@@ -45,6 +45,6 @@
 
 (defn start-server []
   (stop-server)
-  (reset! server (hs/run-server request-handler {:port 2568}))
+  (reset! server (hs/run-server request-handler {:port 9568}))
   (println "server started"))
 
