@@ -52,11 +52,10 @@
                                         :as   state} @state]
                                    (st/replace code-page "{}" (or emacs-text "")))}
     "/mulepantry"       {:status 200
-                         :body   (let [_ #d req
-                                       chatgpt-query (if (= request-method :get)
+                         :body   (let [chatgpt-query (if (= request-method :get)
                                                        (:chatgpt-query @state)
                                                        ((cd/form-decode (slurp body)) "query"))]
-                                   (swap! state assoc :chatgpt-query #d chatgpt-query)
+                                   (swap! state assoc :chatgpt-query chatgpt-query)
                                    (-> chatgpt-page
                                        (st/replace "{query}" chatgpt-query)
                                        (st/replace "{answer}" (if (= chatgpt-query "")
