@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Code Editor</title>
-    <style>
+  <style>
+  @font-face {
+    font-family: "supertight";
+    src: url("supertight.woff") format("woff");
+  }
         body {
             margin: 0;
-            font-family: 'Courier New', monospace;
             background-color: #f5f5f5;
         }
 
@@ -25,8 +28,8 @@
             padding: 10px;
             box-sizing: border-box;
             resize: none;
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
+          font-family: 'supertight','Courier New', monospace;
+            font-size: 12px;
             line-height: 1.5;
             outline: none;
             border: none;
@@ -36,7 +39,7 @@
 </head>
 <body>
     <div class="container">
-        <textarea id="codebox"></textarea>
+  <textarea id="codebox">{}</textarea>
     </div>
     <script>
         const codebox = document.getElementById('codebox');
@@ -57,7 +60,31 @@
         window.addEventListener('resize', adjustTextareaHeight);
 
         // Call the function initially to set the correct height
-        adjustTextareaHeight();
+adjustTextareaHeight();
+
+let timer;
+codebox.addEventListener('input', () => {
+            clearTimeout(timer);
+            timer = setTimeout(submitForm, 5000);
+        });
+
+        function submitForm() {
+            // Replace this URL with the server endpoint to send the updated content
+            const url = '/fereofjhh';
+
+            fetch(url, {
+                method: 'POST',
+                body: codebox.value
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Success:', result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
     </script>
 </body>
 </html>
