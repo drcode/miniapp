@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query and Answer</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        #query {
+            outline: none;
+            border: none;
+            width: 100%;
+            height: 25%;
+            resize: none;
+        }
+        #answer {
+            width: 100%;
+            height: 75%;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function sendPostRequest(queryText) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'mulepantry';
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'query';
+            hiddenInput.value = queryText;
+            form.appendChild(hiddenInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function handleClick() {
+            const query = document.getElementById("query").value;
+            sendPostRequest(query);
+        }
+
+        function init() {
+            document.getElementById("answer").addEventListener("click", handleClick);
+        }
+    </script>
+</head>
+<body onload="init()">
+    <textarea id="query" placeholder="Type your query here">{query}</textarea>
+    <div id="answer">
+        <span>{answer}</span>
+    </div>
+</body>
+</html>
