@@ -2,6 +2,7 @@
   (:require [org.httpkit.server :as hs]
             [clojure.string :as st]
             [fbc-utils.core :as ut]
+            [clj-pid.core :as pid]
             [fbc-utils.debug]))
 
 (def state (atom {:emacs-modified false
@@ -28,8 +29,8 @@
                                     (st/replace code-page "{}" (or emacs-text "")))}
     "/asdfsdidii"  {:status 200
                     :body   (:emacs-text @state)}
-    "/hello"       {:status 200
-                    :body   "hello world"}
+    "/greet"       {:status 200
+                    :body   (str "Hello server " (pid/current))}
     "/favicon.ico" {:status 200}
     {:status 404}))
 
