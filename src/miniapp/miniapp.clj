@@ -13,8 +13,6 @@
                                body
                                server-name]
                         :as   req}]
-  (println "foo")
-  (flush)
   (case uri
     "/fereofjhh"   (do (swap! state
                               (fn [{:keys [emacs-modified
@@ -47,6 +45,6 @@
 
 (defn start-server []
   (stop-server)
-  (reset! server (hs/run-server request-handler {:port 9568}))
+  (reset! server (hs/run-server request-handler {:port 2568}))
   (println "server started"))
 
