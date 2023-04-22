@@ -22,6 +22,7 @@
             resize: none;
         }
         #answer {
+          overflow: auto;
             width: 100%;
             height: 75%;
             background-color: #f0f0f0;
@@ -47,9 +48,31 @@
             sendPostRequest(query);
         }
 
-        function init() {
-            document.getElementById("answer").addEventListener("click", handleClick);
-        }
+      function init() {
+        document.getElementById("answer").addEventListener("click", handleClick);
+        const textarea = document.getElementById("query");
+        let lastTap = 0;
+        textarea.addEventListener("touchstart", function(e) {
+          const currentTime = new Date().getTime();
+          const tapLength = currentTime - lastTap;
+          clearTimeout(timeout);
+          lastTap = currentTime;
+
+          if (tapLength < 500 && tapLength > 0) {
+            e.preventDefault(); // Prevent single tap action
+            textarea.value = ""; // Clear textarea
+          } else {
+            timeout = setTimeout(function() {
+              clearTimeout(timeout);
+            }, 500);
+          }
+        });
+
+        textarea.addEventListener("dblclick", function() {
+          textarea.value = ""; // Clear textarea
+        });
+      }
+
     </script>
 </head>
 <body onload="init()">
