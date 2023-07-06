@@ -23,7 +23,7 @@
                {:keys [system-prompt
                        stop-seqs]
                 :as   options}]
-  (get-in (oa/create-chat-completion (cond-> {:model    "gpt-3.5-turbo"
+  (get-in (oa/create-chat-completion (cond-> {:model    "gpt-4"
                                               :messages (vec (concat (when system-prompt
                                                                        [{:role    "system"
                                                                          :content system-prompt}])
